@@ -1,1 +1,220 @@
+<html>
+	<head>
+		<title>SouNiac</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style type="text/css">
+				body {
+					margin: 0px;
+					padding: 0px;
+					font: normal 13px/100% sans-serif;
+				}
+				.container {
+					width: 55%;
+					margin: 0px auto;
+				}
+				@media screen and (max-width: 500px){
+					.container {
+						width: 100%;
+					}
+				}
+				span {
+					display: none;
+					margin-bottom: 150px;
+				}
+				span.display {
+					display: block;
+				}
+				.content img {
+					width: 100%;
+					height: auto;
+				}
+				.content {
+					position: relative;
+					overflow: hidden;
+					cursor: pointer;
+				}
+				.overlay {
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					opacity: .6;
+					background-image: linear-gradient(to bottom right,#002f4d,#dc4225);
+				}
+				#loadMore {
+					margin: 0px auto;
+					color: #33739E;
+					width: 10%;
+					cursor: pointer;
+					text-align: center;
+					font-size: 155px;
+				}
+				#status {
+					height: 30px;
+					left: 50%;
+					margin: -30px 0 0 -20px;
+					position: absolute;
+					top: 50%;
+					width: 50%;
+					z-index: 1;
+				}
+				.bar {
+					background: #fff;
+					bottom: 1px;
+					height: 3px;
+					position: absolute;
+					width: 3px;
+					-webkit-animation: sound 0ms -800ms linear infinite alternate;
+					animation: sound 0ms -800ms linear infinite alternate;
+				}
+				@keyframes sound {
+					0% {
+						opacity: .35;
+						height: 3px;
+						}
+						100% {
+						opacity: 1;
+						height: 28px;
+					}
+				}
+				@-webkit-keyframes sound {
+					0% {
+						opacity: .35;
+						height: 3px;
+						}
+						100% {
+						opacity: 1;
+						height: 28px;
+					}
+				}
+				.bar:nth-child(1)  { left: 1px; animation-duration: 474ms; left: 1px; -webkit-animation-duration: 474ms;}
+				.bar:nth-child(2)  { left: 5px; animation-duration: 433ms; left: 5px; -webkit-animation-duration: 433ms;}
+				.bar:nth-child(3)  { left: 9px; animation-duration: 407ms; left: 9px; -webkit-animation-duration: 407ms;}
+				.bar:nth-child(4)  { left: 13px; animation-duration: 458ms; left: 13px; -webkit-animation-duration: 458ms;}
+				.bar:nth-child(5)  { left: 17px; animation-duration: 400ms; left: 17px; -webkit-animation-duration: 400ms;}
+				.bar:nth-child(6)  { left: 21px; animation-duration: 427ms; left: 21px; -webkit-animation-duration: 427ms;}
+				.bar:nth-child(7)  { left: 25px; animation-duration: 441ms; left: 25px; -webkit-animation-duration: 441ms;}
+				.bar:nth-child(8)  { left: 29px; animation-duration: 419ms;  left: 29px; -webkit-animation-duration: 419ms;}
+				.bar:nth-child(9)  { left: 33px; animation-duration: 487ms; left: 33px; -webkit-animation-duration: 487ms;}
+				.bar:nth-child(10) { left: 37px; animation-duration: 442ms; left: 37px; -webkit-animation-duration: 442ms;}
+				.player_bar {
+					list-style: none;
+				}
+				.player_bar li {
+					display: block;
+					
+				}
+				.player_bar li a i {
+					text-decoration: none;
+					color: #fff;
+					font-size: 15px;
+					margin: 5px;
+				}
+				audio {
+					display: none;
+				}
+				.content-overlay{
+					position: absolute;
+					z-index: 55;
+					background:  rgba(0,0,0,0.5);
+					left: 0;
+					top: 0;
+					bottom: 0;
+					right: 0;
+					width: 100%;
+				}
+				.playing_audio {
+					display: none;
+				}
+				.menu {
+					width: 0;
+				}
+				.text {
+					margin: 25px;
+					font-size: 12px;
+					color: #adacac;
+				}
+		</style>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(function () {
+				
+				$("span").slice(0, 8).addClass("display");
+				$("#loadMore").on("click", function (e) {
+					e.preventDefault();
+					function load() {
+					$("span:hidden").slice(0, 8).addClass("display");
+					$(".fa-refresh").removeClass("fa-spin");
+					}
+					if ($("span:hidden").length == 0) {
+						$("#loadMore").fadeOut("slow");
+					}
+					$(".fa-refresh").addClass("fa-spin");
+					setTimeout(load, 10000);
+				});
+				$(".content-overlay").click(function(){
+					var audio = $(this).find('audio')[0];
+					var playing_bars = $(this).find(".playing_audio");
+					var menu = $(this).find(".menu");
+					if(audio.paused){
+						audio.play();
+					
+						playing_bars.show();
+						menu.hide();
+						
+					}else{
+						
+						audio.pause();
+						playing_bars.hide();
+						menu.show();
+						
+					}
+				});
+				$(".menu").click(function (e){
+					e.stopPropagation();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<noscript>
+			<meta http-equiv="refresh" content="0;url=noscript">
+		</noscript>
+		<div class="container">
+		</div>
+		<div id="loadMore">
+			<i class="fa fa-refresh"></i>
+		</div>
+		<script type="text/javascript">
+		tracks = [{
+				"track":1,
+				"title":"all",
+				"audioUrl":"http://hcmaslov.d-real.sci-nnov.ru/public/mp3/Queen/01%20Peace%20Inside.mp3",
+				"imageUrl":"https://data1.origin.com/content/dam/originx/web/app/games/far-cry/far-cry-4/far-cry-4-gold-edition_pdp_3840x2160_en_WW.jpg"
+			},{
+				"track":2,
+				"title":"trackall",
+				"audioUrl":"http://hcmaslov.d-real.sci-nnov.ru/public/mp3/Queen/Queen%20'Bring%20Back%20That%20Leroy%20Brown'.mp3",
+				"imageUrl":"https://vignette.wikia.nocookie.net/mining-madness/images/3/36/Call_of_duty_ghosts_logo.jpg/revision/latest?cb=20171008211313"
+			}],
+			$.each(tracks,function(key, value){
+				var trackId = value.track,
+				trackTitle = value.title,
+				trackAudioUrl = value.audioUrl,
+				trackImageUrl = value.imageUrl;
+				if(trackId.toString().lenght === 1){
+					trackId = '0' + trackId;
+				}else{
+					trackId = '' + trackId;
+				}
+				$('.container').append( 
+					'<span><div class="content"><div class="content-overlay"><div id="status"><audio src="'+trackAudioUrl+'" controls></audio><div class="player_bar"><div class="menu"><li><a href=""><i class="fa fa-share"></i></a></li><li><a href=""><i class="fa fa-download"></i></a></li></div><li><div class="playing_audio"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></li></div></div></div><div class="overlay"></div><img src="'+trackImageUrl+'"></div><div class="text">#'+trackTitle+'@prjectMuzic</div></span>'
+					
+					);
+			});
+		</script>		
+	</body>
+</html>
 
