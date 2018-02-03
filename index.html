@@ -190,19 +190,25 @@
 		<script type="text/javascript">
 		tracks = [{
 				"track":1,
-				"title":"all",
-				"audioUrl":"http://hcmaslov.d-real.sci-nnov.ru/public/mp3/Queen/01%20Peace%20Inside.mp3",
-				"imageUrl":"https://data1.origin.com/content/dam/originx/web/app/games/far-cry/far-cry-4/far-cry-4-gold-edition_pdp_3840x2160_en_WW.jpg"
+				"title":"21 Savage, Offset & Metro Boomin - Without Warning ",
+				"audioUrl":"https://dl-web.dropbox.com/get/21_Savage__Offset_%26_Metro_Boomin_-_Without_Warning_(Full_Album).mp3?_subject_uid=447696206&duc_id=dropbox_duc_id&w=AAA51qLcP3128uT3amHC9c6Ebuyy-OiP5FsLuASvekd9nA",
+				"imageUrl":"https://photos-3.dropbox.com/t/2/AACyMjXSq6Kd31lq_n5SYoOmHdiDvKEXuWzo6MUkfQ_wgQ/12/447696206/jpeg/32x32/1/_/1/2/21Sav-metro.jpg/EK2P284DGMYBIAcoBw/hEHmzY4NTjVIPZKPOlrjZySxlfXVRRCmQ1spzedzuXE?size=1024x768&size_mode=3",
+				"url":"",
+				"share":""
 			},{
 				"track":2,
-				"title":"trackall",
-				"audioUrl":"http://hcmaslov.d-real.sci-nnov.ru/public/mp3/Queen/Queen%20'Bring%20Back%20That%20Leroy%20Brown'.mp3",
-				"imageUrl":"https://vignette.wikia.nocookie.net/mining-madness/images/3/36/Call_of_duty_ghosts_logo.jpg/revision/latest?cb=20171008211313"
+				"title":"DAMN. - Kendrick Lamar",
+				"audioUrl":"https://dl-web.dropbox.com/get/KENDRICK_LAMAR_-_DAMN_YOU_%5BFULL_MIXTAPE%5D%5BNEW_2017%5D.mp3?_subject_uid=447696206&duc_id=dropbox_duc_id&w=AAChxjU93CDnu1NBLc7-kW7ufOj70KKQy5WMOqwF_tKKkA",
+				"imageUrl":"https://photos-4.dropbox.com/t/2/AAAp2U7VMWLtXLCnamuLaW7bZ4B-b_as8_sXdoViK7h1jg/12/447696206/jpeg/32x32/1/_/1/2/Kendrick-Lamar-DAMN-album-cover-featured-827x620.jpg/EK2P284DGMkBIAcoBw/z1OF8kHxjgCwQVkSY7ThWucOHk7R8QJihnmY8nGKWks?size=1600x1200&size_mode=3",
+				"url":"",
+				"share":""
 			}],
 			$.each(tracks,function(key, value){
 				var trackId = value.track,
 				trackTitle = value.title,
 				trackAudioUrl = value.audioUrl,
+				trackUrl = value.url,
+				trackShare = value.share,
 				trackImageUrl = value.imageUrl;
 				if(trackId.toString().lenght === 1){
 					trackId = '0' + trackId;
