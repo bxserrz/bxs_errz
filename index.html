@@ -5,27 +5,118 @@
 <title>vid</title>
 </head>
 <body>
+ <ul>
+   <li>
   <video controls>
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
-   <video controls>
+     </li>
+   <li>
+  <video controls>
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
-   <video controls>
+     </li>
+   <li>
+  <video controls>
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
-   <video controls>
+     </li>
+   <li>
+  <video controls>
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
-   <video controls>
+     </li>
+   <li>
+  <video controls>
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
-   <video controls>
+     </li>
+   <li>
+  <video controls>
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
-   <video controls>
+     </li>
+   <li>
+  <video controls>
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+   <li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li><li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li><li>
+  <video controls>
+    <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
+  </video>
+     </li>
+  
+   </ul>
+  <button id="load-more">Load More</button>
     <script>
     document.addEventListener('play', function(e){
     var video = document.getElementsByTagName('video');
@@ -35,6 +126,34 @@
         }
     }
 }, true);
+      var parent = document.querySelector('ul'),
+    items  = parent.querySelectorAll('li'),
+    loadMoreBtn =  document.querySelector('#load-more'),
+    maxItems = 10,
+    hiddenClass = "visually-hidden";
+
+
+[].forEach.call(items, function(item, idx){
+    if (idx > maxItems - 1) {
+        item.classList.add(hiddenClass);
+    }
+});
+
+loadMoreBtn.addEventListener('click', function(){
+
+  [].forEach.call(document.querySelectorAll('.' + hiddenClass), function(item, idx){
+      console.log(item);
+      if (idx < maxItems - 1) {
+          item.classList.remove(hiddenClass);
+      }
+
+      if ( document.querySelectorAll('.' + hiddenClass).length === 0) {
+          loadMoreBtn.style.display = 'none';
+      }
+
+  });
+
+});
     </script>
 </body>
 </html>
