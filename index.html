@@ -3,14 +3,6 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>vid</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-$("video").on("play", function() {
-    $("video").not(this).each(function(index, video) {
-        video[0].pause();
-    });
-});
-</script>
 </head>
 <body>
   <video controls>
@@ -34,5 +26,15 @@ $("video").on("play", function() {
    <video controls>
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
+    <script>
+    document.addEventListener('play', function(e){
+    var video = document.getElementsByTagName('video');
+    for(var i = 0, len = video.length; i < len;i++){
+        if(video[i] != e.target){
+            video[i].pause();
+        }
+    }
+}, true);
+    </script>
 </body>
 </html>
