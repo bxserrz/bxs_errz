@@ -187,6 +187,14 @@ loadMoreBtn.addEventListener('click', function(){
   });
 
 });
-    </script>
+      
+window.onscroll = function() {pause_all()};
+function pause_all() {      
+  
+var videos_var = document.getElementsByTagName('video');
+for(i=0; i<videos_var.length; i++) videos_var[i].pause();
+  
+}
+</script>
 </body>
 </html>
