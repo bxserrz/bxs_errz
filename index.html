@@ -49,8 +49,24 @@ ul {
   border-radius: 50%;
   display: inline-block;
   color:#fff;
-  
+  cursor: pointer;
  }
+  
+ #load-more {
+  width:100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  min-height: 45px;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  background: #fff;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  color:#a6a6a6;
+  cursor: pointer;
+  }
 </style>
 </head>
 <body>
@@ -122,7 +138,7 @@ ul {
      <div class="share">&#x21b7;</div>
      </li>
    </ul>
-  <button id="load-more">Load More</button>
+  <div id="load-more">+</div>
     <script>
     document.addEventListener('play', function(e){
     var video = document.getElementsByTagName('video');
@@ -152,6 +168,7 @@ loadMoreBtn.addEventListener('click', function(){
       console.log(item);
       if (idx < maxItems - 1) {
           item.classList.remove(hiddenClass);
+          window.scrollTo(0,document.body.scrollHeight);
       }
 
       if ( document.querySelectorAll('.' + hiddenClass).length === 0) {
