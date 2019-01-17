@@ -160,8 +160,6 @@ ul {
 
 loadMoreBtn.addEventListener('click', function(){
   
-  element.scrollTop = element.scrollHeight;
-
   [].forEach.call(document.querySelectorAll('.' + hiddenClass), function(item, idx){
       console.log(item);
       if (idx < maxItems - 1) {
