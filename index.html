@@ -65,6 +65,7 @@ ul {
   font-size: 15px;
   color:#fff;
   cursor: pointer;
+  padding: 35px;
   }
 </style>
 </head>
@@ -162,12 +163,14 @@ ul {
 });
 
 loadMoreBtn.addEventListener('click', function(){
+  
+  window.scrollTo(0,document.body.scrollHeight);
 
   [].forEach.call(document.querySelectorAll('.' + hiddenClass), function(item, idx){
       console.log(item);
       if (idx < maxItems - 1) {
           item.classList.remove(hiddenClass);
-          window.scrollTo(0,document.body.scrollHeight);
+       
       }
 
       if ( document.querySelectorAll('.' + hiddenClass).length === 0) {
