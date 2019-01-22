@@ -78,8 +78,8 @@ ul {
        
 window.onload = function () {
   // Get all the elements that match the selector as arrays
-  var copyTextareaBtn = Array.prototype.slice.call(document.querySelectorAll('#share-btn'));
-  var copyTextarea = Array.prototype.slice.call(document.querySelectorAll('#url'));
+  var copyTextareaBtn = Array.prototype.slice.call(document.querySelectorAll('.share'));
+  var copyTextarea = Array.prototype.slice.call(document.querySelectorAll('.url-input'));
 
   // Loop through the button array and set up event handlers for each element
   copyTextareaBtn.forEach(function(btn, idx){
@@ -106,22 +106,22 @@ window.onload = function () {
   <video disableRemotePlayback="true" oncontextmenu="return false;" onclick="this.paused ? this.play() : this.pause();" poster="https://www.thestar.com.my/~/media/online/2018/09/07/13/00/facebookwatch_dpa.ashx/?w=620&h=413&crop=1&hash=E81FB2D1607A5C74448434D4D7F6533B022A9190">
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
-     <div class="share" id="share-btn">&#x21b7;</div>
-     <input type="hidden" value="Mickey" id="url">
+     <div class="share">&#x21b7;</div>
+     <input type="hidden" value="Mickey" class="url-input">
      </li>
    <li>
   <video disableRemotePlayback="true" oncontextmenu="return false;" onclick="this.paused ? this.play() : this.pause();" poster="https://i.ytimg.com/vi/lp4jPRi_nRc/maxresdefault.jpg">
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
-     <div class="share" id="share-btn">&#x21b7;</div>
-     <input type="hidden" value="http" id="url">
+     <div class="share">&#x21b7;</div>
+     <input type="hidden" value="http" class="url-input">
      </li>
    <li>
   <video disableRemotePlayback="true" oncontextmenu="return false;" onclick="this.paused ? this.play() : this.pause();" poster="https://imgix.ranker.com/user_node_img/61/1206645/original/ichigo-kurosaki-u30?w=650&q=50&fm=jpg&fit=crop&crop=faces">
     <source src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" type="video/mp4" />
   </video>
-     <div class="share" id="share-btn">&#x21b7;</div>
-     <input type="hidden" value="123" id="url">
+     <div class="share">&#x21b7;</div>
+     <input type="hidden" value="123" class="url-input">
      </li>
    <li>
   <video disableRemotePlayback="true" oncontextmenu="return false;" onclick="this.paused ? this.play() : this.pause();" poster="https://vignette.wikia.nocookie.net/fb4884be-7fe6-44d3-8c72-40678b850015/scale-to-width-down/800">
