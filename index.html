@@ -84,10 +84,6 @@ ul {
   background:rgba(0,0,0,0.4);
   display:none;
 }
-  
-.in {
-  display:block;
-  }
 </style>
 </head>
 <body>
@@ -108,18 +104,14 @@ window.onload = function () {
 
       if(document.execCommand('copy')){
       
-          document.getElementById('copy-message').classList.add('in');
-
           setTimeout(function() {
-            document.getElementById('copy-message').classList.remove('in');
+            document.getElementById('copy-message').style.display="block";
           }, 2000);
 
       }else{
-          
-      document.getElementById('copy-message-error').classList.add('in');
-
+      
           setTimeout(function() {
-            document.getElementById('copy-message-error').classList.remove('in');
+            document.getElementById('copy-message-error').style.display="block";
           }, 2000);
       }
     });
