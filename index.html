@@ -103,15 +103,15 @@ window.onload = function () {
       copyTextarea[idx].select();
 
       if(document.execCommand('copy')){
-      
+      document.getElementById('copy-message').style.display="block";
           setTimeout(function() {
-            document.getElementById('copy-message').style.display="block";
+            document.getElementById('copy-message').style.display="none";
           }, 2000);
 
       }else{
-      
+      document.getElementById('copy-message-error').style.display="block";
           setTimeout(function() {
-            document.getElementById('copy-message-error').style.display="block";
+            document.getElementById('copy-message-error').style.display="none";
           }, 2000);
       }
     });
