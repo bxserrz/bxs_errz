@@ -83,7 +83,7 @@ ul {
   font-size: 12px;
   background:rgba(0,0,0,0.5);
   display:none;
-  z-index:10;
+  z-index:20;
   font-weight: bold;
 }
 .url-input {
@@ -92,6 +92,23 @@ ul {
   color:#737373;
   font-size: 15px;
   outline:none;
+  }
+.nav {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  min-height:5px;
+  z-index:10;
+  }
+.nav li{
+  list-style:none;
+  color:#595959;
+  display:block;
+  padding:10px;
+  font-size: 15px;
   }
 </style>
 </head>
@@ -128,6 +145,7 @@ window.onload = function () {
   });
 }
 </script>
+  <div class="nav"><li>&#10073;</li></div>
   <div id="copy-message">Copied</div>
   <div id="copy-message-error">Error</div>
  <ul>
