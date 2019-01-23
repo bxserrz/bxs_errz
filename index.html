@@ -86,6 +86,41 @@ ul {
   z-index:20;
   font-weight: bold;
 }
+#loader-wrapper {
+  position:fixed;
+  top:50%;
+  left:50%;
+  padding:10px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  background:rgba(0,0,0,0.5);
+  z-index:25;
+}
+.loader {
+  border-radius: 50%;
+  border-top: 5px solid #fff;
+  width: 15px;
+  height: 15px;
+  -webkit-animation: spin 2s linear infinite;
+  -moz-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+  
+@-moz-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .url-input {
   border: 0;
   margin: 55px;
@@ -93,7 +128,7 @@ ul {
   font-size: 15px;
   outline:none;
   }
-.nav {
+#nav {
   position:fixed;
   top:0;
   left:0;
@@ -101,8 +136,9 @@ ul {
   background:#fff;
   min-height:5px;
   z-index:10;
+  display:none;
   }
-.nav li{
+#nav li{
   list-style:none;
   color:#595959;
   display:block;
@@ -116,6 +152,9 @@ ul {
 <script>
        
 window.onload = function () {
+  
+   document.getElementById('loader-wrapper').style.display="none";
+   document.getElementById('nav').style.display="block";
  
   var copyTextareaBtn = Array.prototype.slice.call(document.querySelectorAll('.share'));
   var copyTextarea = Array.prototype.slice.call(document.querySelectorAll('.url-input'));
@@ -145,9 +184,10 @@ window.onload = function () {
   });
 }
 </script>
-  <div class="nav"><li>&#10073; &#10073;</li></div>
+  <div id="nav"><li>&#10073; &#10073;</li></div>
   <div id="copy-message">Copied</div>
   <div id="copy-message-error">Error</div>
+  <div id="loader-wrapper"><div class="loader"></div></div>
  <ul>
    <li>
   <video disableRemotePlayback="true" oncontextmenu="return false;" onclick="this.paused ? this.play() : this.pause();" poster="https://www.thestar.com.my/~/media/online/2018/09/07/13/00/facebookwatch_dpa.ashx/?w=620&h=413&crop=1&hash=E81FB2D1607A5C74448434D4D7F6533B022A9190">
