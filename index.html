@@ -141,11 +141,57 @@ ul {
   }
 #nav li{
   list-style:none;
-  color:#595959;
-  display:block;
+  display:inline-block;
   padding:10px;
-  font-size: 15px;
-  font-weight: bold;
+  }
+.eye {
+  background:#666666;
+  width:15px;
+  height:15px;
+  -webkit-border-radius:50%;
+  -moz-border-radius:50%;
+  border-radius:50%;
+  -webkit-transform-origin:50%;
+  -moz-transform-origin:50%;
+  transform-origin:50%;
+  -webkit-animation:blink 3s infinite;
+  -moz-animation:blink 3s infinite;
+  animation:blink 3s infinite;
+  }
+  @-webkit-keyframes blink {
+    0%, 100% {
+     transform: scale(1, .05);
+    }
+    
+    5%,
+    95% {
+    transform: scale(1, 1);
+    
+    }
+  }
+  
+  @-moz-keyframes blink {
+    0%, 100% {
+     transform: scale(1, .05);
+    }
+    
+    5%,
+    95% {
+    transform: scale(1, 1);
+    
+    }
+  }
+  
+  @keyframes blink {
+    0%, 100% {
+     transform: scale(1, .05);
+    }
+    
+    5%,
+    95% {
+    transform: scale(1, 1);
+    
+    }
   }
 </style>
 </head>
@@ -185,7 +231,7 @@ window.onload = function () {
   });
 }
 </script>
-  <div id="nav"><li>&#10073; &#10073;</li></div>
+  <div id="nav"><li><span class="eye"></span></li><li><span class="eye"></span></li></div>
   <div id="copy-message">Copied</div>
   <div id="copy-message-error">Error</div>
   <div id="loader-wrapper"><div class="loader"></div></div>
