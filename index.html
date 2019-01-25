@@ -129,67 +129,6 @@ ul {
   font-size: 15px;
   outline:none;
   }
-#nav {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  background:#fff;
-  min-height:5px;
-  z-index:10;
-  display:none;
-  }
-#nav li{
-  list-style:none;
-  display:inline-block;
-  padding:15px;
-  }
-.eye {
-  background:#a6a6a6;
-  width:2px;
-  height:25px;
-  -webkit-transform-origin:50%;
-  -moz-transform-origin:50%;
-  transform-origin:50%;
-  -webkit-animation:blink 3s infinite;
-  -moz-animation:blink 3s infinite;
-  animation:blink 3s infinite;
-  }
-  @-webkit-keyframes blink {
-    0%, 100% {
-     transform: scale(1, .05);
-    }
-    
-    5%,
-    95% {
-    transform: scale(1, 1);
-    
-    }
-  }
-  
-  @-moz-keyframes blink {
-    0%, 100% {
-     transform: scale(1, .05);
-    }
-    
-    5%,
-    95% {
-    transform: scale(1, 1);
-    
-    }
-  }
-  
-  @keyframes blink {
-    0%, 100% {
-     transform: scale(1, .05);
-    }
-    
-    5%,
-    95% {
-    transform: scale(1, 1);
-    
-    }
-  }
 </style>
 </head>
 <body>
@@ -198,7 +137,6 @@ ul {
 window.onload = function () {
   
    document.getElementById('loader-wrapper').style.display="none";
-   document.getElementById('nav').style.display="block";
  
   var copyTextareaBtn = Array.prototype.slice.call(document.querySelectorAll('.share'));
   var copyTextarea = Array.prototype.slice.call(document.querySelectorAll('.url-input'));
@@ -228,7 +166,6 @@ window.onload = function () {
   });
 }
 </script>
-  <div id="nav"><li><div class="eye"></span></li><li><div class="eye"></span></li></div>
   <div id="copy-message">Copied</div>
   <div id="copy-message-error">Error</div>
   <div id="loader-wrapper"><div class="loader"></div></div>
