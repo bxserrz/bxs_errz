@@ -4,230 +4,245 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>vid</title>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
-   html {
-   box-sizing: border-box;
-   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-      Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-   font-size: 16px;
- 
-}
+$slider-width: 400px;
+$slider-height: 300px;
 
-*,
-*:before,
-*:after {
-   box-sizing: inherit;
-}
+* { box-sizing: border-box; }
 
-.container {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   width: 100%;
-   margin: 3rem auto;
+body {
+  height: 100%;
+  background-color: #7656d6;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  letter-spacing: 0.15em;
+  font-size: 22px;
 }
 
 .slider {
-   width: 350px;
-   height: 500px;
-   margin: 0 auto;
-   background: black;
-   overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: $slider-width;
+  height: $slider-height;
+  box-shadow: 3px 3px 10px rgba(0,0,0,.2);
 }
 
-.slider__wrapper {
-   height: 500px;
-   transition: transform 0.3s;
+.wrapper {
+  overflow: hidden;
+  position: relative;
+  width: $slider-width;
+  height: $slider-height;
+  z-index: 1;
+}
+
+.slides {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: -$slider-width;
+  width: 10000px;
+}
+
+.slides.shifting {
+  transition: left .2s ease-out;
 }
 
 .slide {
-   position: relative;
-   float: left;
-   width: 350px;
-   height: 500px;
-   -webkit-user-select: none;
-   -moz-user-select: none;
-   -ms-user-select: none;
-   -o-user-select: none;
-   pointer-events: none;
-
-   &::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 40%;
-      background: linear-gradient(transparent, black);
-   }
+  width: $slider-width;
+  height: $slider-height;
+  cursor: pointer;
+  
+  transition: all 1s;
+  position: relative;
+  background: #FFCF47;
+  border-radius: 2px;
 }
 
-.slide__img {
-   width: 100%;
-   height: 500px;
-   object-fit: cover;
+.slider.loaded {
+  .slide:nth-child(2),
+  .slide:nth-child(7) { background: #FFCF47 }
+  .slide:nth-child(1),
+  .slide:nth-child(6) { background: #7ADCEF }
+  .slide:nth-child(3) { background: #3CFF96 }
+  .slide:nth-child(4) { background: #a78df5 }
+  .slide:nth-child(5) { background: #ff8686 }
 }
 
-.slide__text {
-   position: absolute;
-   color: white;
-   bottom: 0.625rem;
-   left: 0;
-   padding: 1.25rem;
+.control {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50px;
+  margin-top: -20px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+  z-index: 2;
 }
 
-.swipe {
-   margin-top: 2.5rem;
+.prev,
+.next {
+  background-size: 22px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
-.swipe__img {
-   transform: translatex(10px);
-   animation: moving-finger 0.8s ease-in-out 4 alternate;
+.prev {
+  background-image: url(https://cdn0.iconfinder.com/data/icons/navigation-set-arrows-part-one/32/ChevronLeft-512.png);
+  left: -20px;
 }
 
-@keyframes moving-finger {
-   from {
-      transform: translatex(10px);
-   }
-   to {
-      transform: translatex(0);
-   }
+.next {
+  background-image: url(https://cdn0.iconfinder.com/data/icons/navigation-set-arrows-part-one/32/ChevronRight-512.png);
+  right: -20px;
 }
 
-
+.prev:active,
+.next:active {
+  transform: scale(.8);
+}
 
 </style>
 </head>
 <body>
-<div class="container">
-   <div class="slider">
-      <div class="slider__wrapper">
-         <div class="slide">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/829617/slide_touch_1.jpg" alt="" class="slide__img">
-            <p class="slide__text">8 Avenue du Mahatma Gandhi Paris</p>
-         </div>
-         <div class="slide">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/829617/slide_touch_2.jpg" alt="" class="slide__img">
-            <p class="slide__text">Wilderness photographer</p>
-         </div>
-         <div class="slide">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/829617/slide_touch_3.jpg" alt="" class="slide__img">
-            <p class="slide__text">Little Governors Camp, Kenya</p>
-         </div>
-         <div class="slide">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/829617/slide_touch_4.jpg" alt="" class="slide__img">
-            <p class="slide__text">Purwokerto, Indonesia</p>
-         </div>
-         <div class="slide">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/829617/slide_touch_5.jpg" alt="" class="slide__img">
-            <p class="slide__text">Coffee break</p>
-         </div>
-      </div>
-   </div>
-   <div class="swipe">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/829617/finger-swipe.png" alt="" class="swipe__img">
-   </div>
+<div id="slider" class="slider">
+  <div class="wrapper">
+    <div id="slides" class="slides">
+      <span class="slide">Slide 1</span>
+      <span class="slide">Slide 2</span>
+      <span class="slide">Slide 3</span>
+      <span class="slide">Slide 4</span>
+      <span class="slide">Slide 5</span>
+    </div>
+  </div>
+  <a id="prev" class="control prev"></a>
+  <a id="next" class="control next"></a>
 </div>
 <script>
-       
-const container = document.querySelector('.slider');
-const container_width = container.clientWidth;
-const imgs_wrapper = document.querySelector('.slider__wrapper');
-const imgs = document.querySelectorAll('.slide');
-const total_imgs = imgs.length;
-let current_index = 0;
-let pointer_is_down = false;
-let [start_x, end_x] = [0, 0];
-let move_distance = 0;
+   
+var slider = document.getElementById('slider'),
+    sliderItems = document.getElementById('slides'),
+    prev = document.getElementById('prev'),
+    next = document.getElementById('next');
 
-function init() {
-   imgs_wrapper.style.width = `${container_width * total_imgs}px`;
+function slide(wrapper, items, prev, next) {
+  var posX1 = 0,
+      posX2 = 0,
+      posInitial,
+      posFinal,
+      threshold = 100,
+      slides = items.getElementsByClassName('slide'),
+      slidesLength = slides.length,
+      slideSize = items.getElementsByClassName('slide')[0].offsetWidth,
+      firstSlide = slides[0],
+      lastSlide = slides[slidesLength - 1],
+      cloneFirst = firstSlide.cloneNode(true),
+      cloneLast = lastSlide.cloneNode(true),
+      index = 0,
+      allowShift = true;
+  
+  // Clone first and last slide
+  items.appendChild(cloneFirst);
+  items.insertBefore(cloneLast, firstSlide);
+  wrapper.classList.add('loaded');
+  
+  // Mouse events
+  items.onmousedown = dragStart;
+  
+  // Touch events
+  items.addEventListener('touchstart', dragStart);
+  items.addEventListener('touchend', dragEnd);
+  items.addEventListener('touchmove', dragAction);
+  
+  // Click events
+  prev.addEventListener('click', function () { shiftSlide(-1) });
+  next.addEventListener('click', function () { shiftSlide(1) });
+  
+  // Transition events
+  items.addEventListener('transitionend', checkIndex);
+  
+  function dragStart (e) {
+    e = e || window.event;
+    e.preventDefault();
+    posInitial = items.offsetLeft;
+    
+    if (e.type == 'touchstart') {
+      posX1 = e.touches[0].clientX;
+    } else {
+      posX1 = e.clientX;
+      document.onmouseup = dragEnd;
+      document.onmousemove = dragAction;
+    }
+  }
+
+  function dragAction (e) {
+    e = e || window.event;
+    
+    if (e.type == 'touchmove') {
+      posX2 = posX1 - e.touches[0].clientX;
+      posX1 = e.touches[0].clientX;
+    } else {
+      posX2 = posX1 - e.clientX;
+      posX1 = e.clientX;
+    }
+    items.style.left = (items.offsetLeft - posX2) + "px";
+  }
+  
+  function dragEnd (e) {
+    posFinal = items.offsetLeft;
+    if (posFinal - posInitial < -threshold) {
+      shiftSlide(1, 'drag');
+    } else if (posFinal - posInitial > threshold) {
+      shiftSlide(-1, 'drag');
+    } else {
+      items.style.left = (posInitial) + "px";
+    }
+
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+  
+  function shiftSlide(dir, action) {
+    items.classList.add('shifting');
+    
+    if (allowShift) {
+      if (!action) { posInitial = items.offsetLeft; }
+
+      if (dir == 1) {
+        items.style.left = (posInitial - slideSize) + "px";
+        index++;      
+      } else if (dir == -1) {
+        items.style.left = (posInitial + slideSize) + "px";
+        index--;      
+      }
+    };
+    
+    allowShift = false;
+  }
+    
+  function checkIndex (){
+    items.classList.remove('shifting');
+
+    if (index == -1) {
+      items.style.left = -(slidesLength * slideSize) + "px";
+      index = slidesLength - 1;
+    }
+
+    if (index == slidesLength) {
+      items.style.left = -(1 * slideSize) + "px";
+      index = 0;
+    }
+    
+    allowShift = true;
+  }
 }
 
-// Mousemove and Touchmove Event
-function createDraggingEffects() {
-   const max_distance = 2;
-   const scrolled_distance = (current_index * container_width) + (start_x - end_x) / max_distance;
-
-   switchImages(-scrolled_distance);
-}
-
-// Mouseup and Touchend Event
-function calculateFinalMoveDistance() {
-   const scrolled_distance = Math.abs(start_x - end_x);
-   const minimum_distance = 30;
-
-   if (scrolled_distance < minimum_distance) {
-      move_distance = -(current_index * container_width);
-      switchImages();
-      return false;
-   }
-
-   if (start_x > end_x & current_index < total_imgs - 1) { // scroll next
-      current_index++;
-   } else if (start_x < end_x && current_index > 0) { // scroll prev
-      current_index--;
-   }
-
-   move_distance = -(current_index * container_width);
-   switchImages(move_distance);
-}
-
-// Switch Images
-function switchImages(scrolled_number) {
-   const distance = scrolled_number || move_distance;
-
-   imgs_wrapper.style.transform = `translateX(${distance}px)`;
-}
-
-// Mouseleave event
-function handleMouseLeave(e) {
-   if (!pointer_is_down) return false;
-
-   pointer_is_down = false;
-   [start_x, end_x] = [0, 0];
-   switchImages();
-}
-
-init();
-
-container.addEventListener('mousedown', (e) => {
-   e.preventDefault();
-   pointer_is_down = true;
-   start_x = e.pageX;
-});
-
-container.addEventListener('mousemove', (e) => {
-   e.preventDefault();
-   if (!pointer_is_down) return false;
-   end_x = e.pageX;
-   createDraggingEffects();
-});
-
-container.addEventListener('mouseup', (e) => {
-   e.preventDefault();
-   pointer_is_down = false;
-   calculateFinalMoveDistance();
-});
-
-container.addEventListener('mouseleave', handleMouseLeave);
-
-container.addEventListener('touchstart', (e) => {
-   pointer_is_down = true;
-   start_x = e.touches[0].pageX;
-});
-
-container.addEventListener('touchmove', (e) => {
-   if (!pointer_is_down) return false;
-   end_x = e.touches[0].pageX;
-   createDraggingEffects();
-});
-
-container.addEventListener('touchend', (e) => {
-   pointer_is_down = false;
-   calculateFinalMoveDistance();
-});
+slide(slider, sliderItems, prev, next); 
 
 </script>
 </body>
