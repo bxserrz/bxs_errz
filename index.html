@@ -2,198 +2,280 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src=".js"></script>
 <title>vid</title>
 <style>
-  
-* { box-sizing: border-box; }
-
-body {
-  height: 100%;
-  background-color: #7656d6;
-  color: #333;
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-  letter-spacing: 0.15em;
-  font-size: 22px;
+ body{
+  margin:0;
+  padding:0;
+  background-color:whitesmoke;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-
-.slider {
+  .carouselOfImages{
+  position: relative;
+  margin: auto;
+  overflow: visible;
   width: 100%;
-  height: 100%;
-  box-shadow: 3px 3px 10px rgba(0,0,0,.2);
+}
+.gradient-left{
+  display: block;
+  position: relative;
+  background-image: linear-gradient(to right, whitesmoke, transparent 100%);
+    margin-top: -270px;
+  height: 150px;
+  width: 8%;
+  content: '';
+}
+.gradient-right{
+  display: block;
+  position: relative;
+  float: right;
+  right:0;
+  background-image: linear-gradient(to left, whitesmoke, transparent 100%);
+      margin-top: -150px;
+  height: 150px;
+  width:8%;
+  content: '';
 }
 
-.wrapper {
+.carouselImage {
+    position: relative;
+    width: 20%;
+    height: 45px;
+    padding: 24px;
+    border: 1.5px solid black;
+    margin-right: 33px;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    counter-increment: carousel-cell;
+    text-align: center;
+    vertical-align: center;
+    transition: transform 0.5s;
+    font-size: 1.2em;
+  }
+@media only screen and (max-width: 1300px){
+    .carouselImage{
+        width: 30%;
+    }
+}
+@media only screen and (max-width: 773px){
+    .carouselImage{
+        width: 50%;
+    }
+
+}
+@media only screen and (max-width: 490px){
+    .carouselImage{
+        width: 50%;
+        padding: 15px;
+    }
+
+}
+
+
+.carouselImage.is-selected {
+
+border: 1.5px solid #00ADEE;
+color:#00ADEE;
+  z-index:10;
+  transform: scale(1);
+}
+.carouselImage.nextToSelectedLeft, .carouselImage.nextToSelectedRight {
+  transform: scale(1);
+  z-index:5;
+}
+
+/*! Flickity v2.0.5
+https://flickity.metafizzy.co
+---------------------------------------------- */
+
+.flickity-enabled {
+  position: relative;
+}
+
+/* .flickity-enabled:focus { outline: none; } */
+
+.flickity-viewport {
   overflow: hidden;
   position: relative;
+  height: 100%;
+}
+
+.flickity-slider {
+  position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 1;
 }
 
-.slides {
-  display:flex;
-  position: relative;
-  top: 0;
-  left: -400px;
-  width: 10000px;
+/* draggable */
+
+.flickity-enabled.is-draggable {
+  -webkit-tap-highlight-color: transparent;
+/*           tap-highlight-color: transparent; */
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
-.slides.shifting {
-  transition: left .2s ease-out;
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
 }
 
-.slide {
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  
-  transition: all 1s;
-  position: relative;
-  background: #FFCF47;
-  border-radius: 2px;
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
-
-.slider.loaded {
-  .slide:nth-child(2),
-  .slide:nth-child(7) { background: #FFCF47 }
-  .slide:nth-child(1),
-  .slide:nth-child(6) { background: #7ADCEF }
-  .slide:nth-child(3) { background: #3CFF96 }
-  .slide:nth-child(4) { background: #a78df5 }
-  .slide:nth-child(5) { background: #ff8686 }
+.flickity-viewport {
+    margin: 0px;
+    width: 100%;
+    margin-bottom: 100px;
 }
 
 </style>
 </head>
 <body>
-<div id="slider" class="slider">
-  <div class="wrapper">
-    <div id="slides" class="slides">
-      <span class="slide">Slide 1</span>
-      <span class="slide">Slide 2</span>
-      <span class="slide">Slide 3</span>
-      <span class="slide">Slide 4</span>
-      <span class="slide">Slide 5</span>
+    <div class="carouselContainer">
+        <div class="carouselOfImages">
+                <div class="carouselImage">Item</div>
+                <div class="carouselImage">Item</div>
+                <div class="carouselImage">Item</div>
+                <div class="carouselImage">Item</div>
+                <div class="carouselImage">Item</div>
+        </div>
+        <div class="gradient-left">
+        </div>
+        <div class="gradient-right">
+        </div>
     </div>
-  </div>
-</div>
 <script>
-   
-var slider = document.getElementById('slider'),
-    sliderItems = document.getElementById('slides'),
+//CAROUSEL SETTINGS
+var $imagesCarousel = jQuery('.carouselOfImages').flickity({
+  /* options, defaults listed */
 
+  accessibility: false,
+  /* enable keyboard navigation, pressing left & right keys */
 
-function slide(wrapper, items) {
-  var posX1 = 0,
-      posX2 = 0,
-      posInitial,
-      posFinal,
-      threshold = 100,
-      slides = items.getElementsByClassName('slide'),
-      slidesLength = slides.length,
-      slideSize = items.getElementsByClassName('slide')[0].offsetWidth,
-      firstSlide = slides[0],
-      lastSlide = slides[slidesLength - 1],
-      cloneFirst = firstSlide.cloneNode(true),
-      cloneLast = lastSlide.cloneNode(true),
-      index = 0,
-      allowShift = true;
-  
-  // Clone first and last slide
-  items.appendChild(cloneFirst);
-  items.insertBefore(cloneLast, firstSlide);
-  wrapper.classList.add('loaded');
-  
-  // Mouse events
-  items.onmousedown = dragStart;
-  
-  // Touch events
-  items.addEventListener('touchstart', dragStart);
-  items.addEventListener('touchend', dragEnd);
-  items.addEventListener('touchmove', dragAction);
-  
-  // Transition events
-  items.addEventListener('transitionend', checkIndex);
-  
-  function dragStart (e) {
-    e = e || window.event;
-    e.preventDefault();
-    posInitial = items.offsetLeft;
-    
-    if (e.type == 'touchstart') {
-      posX1 = e.touches[0].clientX;
-    } else {
-      posX1 = e.clientX;
-      document.onmouseup = dragEnd;
-      document.onmousemove = dragAction;
-    }
+  autoPlay: false,
+  pauseAutoPlayOnHover: false,
+  /* advances to the next cell
+  if true, default is 3 seconds
+  or set time between advances in milliseconds
+  i.e. `autoPlay: 1000` will advance every 1 second */
+
+  cellAlign: 'center',
+  /* alignment of cells, 'center', 'left', or 'right'
+  or a decimal 0-1, 0 is beginning (left) of container, 1 is end (right) */
+
+  // cellSelector: '.topic-switcher__item',
+  /* specify selector for cell elements */
+
+  contain: false,
+  /* will contain cells to container
+  so no excess scroll at beginning or end
+  has no effect if wrapAround is enabled */
+
+  draggable: true,
+  /* enables dragging & flickin
+  freeScroll: false,
+  enables content to be freely scrolled and flicked
+  without aligning cells */
+
+  friction: 0.2,
+  /* smaller number = easier to flick farther */
+
+  initialIndex: 0,
+  /* zero-based index of the initial selected cell */
+
+  lazyLoad: false,
+  /* enable lazy-loading images
+  set img data-flickity-lazyload="src.jpg"
+  set to number to load images adjacent cells */
+
+  percentPosition: true,
+  /* sets positioning in percent values, rather than pixels
+  Enable if items have percent widths
+  Disable if items have pixel widths, like images */
+
+  prevNextButtons: false,
+  /* creates and enables buttons to click to previous & next cells */
+
+  pageDots: false,
+  /* create and enable page dots */
+
+  resize: true,
+  /* listens to window resize events to adjust size & positions */
+
+  rightToLeft: false,
+  /* enables right-to-left layout */
+
+  setGallerySize: true,
+  /* sets the height of gallery
+  disable if gallery already has height set with CSS */
+
+  watchCSS: false,
+  /* watches the content of :after of the element
+  activates if #element:after { content: 'flickity' }
+  IE8 and Android 2.3 do not support watching :after
+  set watch: 'fallbackOn' to enable for these browsers */
+
+  wrapAround: true
+    /* at end of cells, wraps-around to first for infinite scrolling */
+});
+
+function resizeCells() {
+  var flkty = $imagesCarousel.data('flickity');
+  var $current = flkty.selectedIndex;
+  var $length = flkty.cells.length;
+  var $imageNumLimit = 5;
+  if ($length < $imageNumLimit) {
+    $imagesCarousel.flickity('destroy');
   }
-
-  function dragAction (e) {
-    e = e || window.event;
-    
-    if (e.type == 'touchmove') {
-      posX2 = posX1 - e.touches[0].clientX;
-      posX1 = e.touches[0].clientX;
-    } else {
-      posX2 = posX1 - e.clientX;
-      posX1 = e.clientX;
-    }
-    items.style.left = (items.offsetLeft - posX2) + "px";
+  jQuery('.carouselOfImages .carouselImage').removeClass("nextToSelectedLeft");
+  jQuery('.carouselOfImages .carouselImage').removeClass("nextToSelectedRight");
+  jQuery('.carouselOfImages .carouselImage').removeClass("nextToSelectedLeft2");
+  jQuery('.carouselOfImages .carouselImage').removeClass("nextToSelectedRight2");
+  jQuery('.carouselOfImages .carouselImage').eq($current - 1).addClass("nextToSelectedLeft");
+  jQuery('.carouselOfImages .carouselImage').eq($current - 2).addClass("nextToSelectedLeft2");
+  var $endCell;
+  if ($current + 1 == $length) {
+    $endCell = "0";
+  } else {
+    $endCell = $current + 1;
   }
-  
-  function dragEnd (e) {
-    posFinal = items.offsetLeft;
-    if (posFinal - posInitial < -threshold) {
-      shiftSlide(1, 'drag');
-    } else if (posFinal - posInitial > threshold) {
-      shiftSlide(-1, 'drag');
-    } else {
-      items.style.left = (posInitial) + "px";
-    }
-
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-  
-  function shiftSlide(dir, action) {
-    items.classList.add('shifting');
-    
-    if (allowShift) {
-      if (!action) { posInitial = items.offsetLeft; }
-
-      if (dir == 1) {
-        items.style.left = (posInitial - slideSize) + "px";
-        index++;      
-      } else if (dir == -1) {
-        items.style.left = (posInitial + slideSize) + "px";
-        index--;      
-      }
-    };
-    
-    allowShift = false;
-  }
-    
-  function checkIndex (){
-    items.classList.remove('shifting');
-
-    if (index == -1) {
-      items.style.left = -(slidesLength * slideSize) + "px";
-      index = slidesLength - 1;
-    }
-
-    if (index == slidesLength) {
-      items.style.left = -(1 * slideSize) + "px";
-      index = 0;
-    }
-    
-    allowShift = true;
+  jQuery('.carouselOfImages .carouselImage').eq($endCell).addClass("nextToSelectedRight");
+  if($endCell + 1 < $imageNumLimit){
+    jQuery('.carouselOfImages .carouselImage').eq($endCell + 1).addClass("nextToSelectedRight2"); 
+  } else {
+    jQuery('.carouselOfImages .carouselImage').eq(0).addClass("nextToSelectedRight2");
   }
 }
+resizeCells();
 
-slide(slider, sliderItems); 
+$imagesCarousel.on('scroll.flickity', function() {
+  resizeCells();
+});
 
+
+//HOVER FUNCTIONS
+$('.carouselImage').bind("mouseover", function(){
+  if (this.className === 'carouselImage nextToSelectedLeft') {
+    $imagesCarousel.flickity('playLeftSlowPlayer');
+  } else if (this.className === 'carouselImage nextToSelectedLeft2') {
+    $imagesCarousel.flickity('playLeftFastPlayer');
+  } else if (this.className === 'carouselImage nextToSelectedRight') {
+    $imagesCarousel.flickity('playRightSlowPlayer');
+  } else if (this.className === 'carouselImage nextToSelectedRight2') {
+    $imagesCarousel.flickity('playRightFastPlayer');
+  }
+});
+
+$('.carouselImage').bind("mouseout", function(){
+  $imagesCarousel.flickity('pausePlayer');
+});
 </script>
 </body>
 </html>
