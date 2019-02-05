@@ -224,10 +224,11 @@ resizeCells();
 
 $imagesCarousel.on('scroll.flickity', function() {
   resizeCells();
- alert('12');
 });
-
-
+ 
+$imagesCarousel.on('settle.flickity', function () {
+alert('12');
+});
 //HOVER FUNCTIONS
 $('.carouselImage').bind("mouseover", function(){
   if (this.className === 'carouselImage nextToSelectedLeft') {
