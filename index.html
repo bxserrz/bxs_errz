@@ -244,7 +244,7 @@ $('.carouselImage').bind("mouseout", function(){
   $imagesCarousel.flickity('pausePlayer');
 });
  
-$imagesCarousel.on('settle.flickity', function () {
+$imagesCarousel.on('select.flickity', function () {
       console.log('Flickity settled at ' + flkty.selectedIndex);
 
       $imagesCarousel.find('.carouselImage video').each(function (i, video) {
