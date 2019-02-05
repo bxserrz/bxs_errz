@@ -224,6 +224,7 @@ resizeCells();
 
 $imagesCarousel.on('scroll.flickity', function() {
   resizeCells();
+ alert('12');
 });
 
 
@@ -244,20 +245,7 @@ $('.carouselImage').bind("mouseout", function(){
   $imagesCarousel.flickity('pausePlayer');
 });
  
-$imagesCarousel.on('select.flickity', function () {
-      console.log('Flickity settled at ' + flkty.selectedIndex);
 
-      $imagesCarousel.find('.carouselImage video').each(function (i, video) {
-          video.pause();
-          $(video).on('loadeddata', onLoadeddata);
-      });
-
-      $imagesCarousel.find('.carouselImage.is-selected video').each(function (i, video) {
-          video.play();
-          $(video).on('loadeddata', onLoadeddata);
-      });
-
-  });
 </script>
 </body>
 </html>
