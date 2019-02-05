@@ -227,11 +227,11 @@ $imagesCarousel.on('scroll.flickity', function() {
 });
  
 $imagesCarousel.on('settle.flickity', function () {
-$imagesCarousel.find('.carouselImage video').each(function (i, video) {
+$imagesCarousel.find('.carouselImage video').each(function () {
           video.pause();
           $(video).on('loadeddata', onLoadeddata);
       });
-$imagesCarousel.find('.carouselImage.is-selected video').each(function (i, video) {
+$imagesCarousel.find('.carouselImage.is-selected video').each(function () {
           video.play();
           $(video).on('loadeddata', onLoadeddata);
       });
