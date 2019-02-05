@@ -227,7 +227,14 @@ $imagesCarousel.on('scroll.flickity', function() {
 });
  
 $imagesCarousel.on('settle.flickity', function () {
-alert('12');
+$imagesCarousel.find('.carouselImage video').each(function (i, video) {
+          video.pause();
+          $(video).on('loadeddata', onLoadeddata);
+      });
+$imagesCarousel.find('.carouselImage.is-selected video').each(function (i, video) {
+          video.play();
+          $(video).on('loadeddata', onLoadeddata);
+      });
 });
 //HOVER FUNCTIONS
 $('.carouselImage').bind("mouseover", function(){
