@@ -29,8 +29,6 @@
   }
     
 .carouselImage.is-selected {
-border: 1.5px solid #00ADEE;
-color:#00ADEE;
   z-index:10;
   transform: scale(1);
 }
@@ -93,17 +91,31 @@ https://flickity.metafizzy.co
 <body>
     <div class="carouselContainer">
         <div class="carouselOfImages">
-                <div class="carouselImage">Item</div>
-                <div class="carouselImage">Item</div>
-                <div class="carouselImage">Item</div>
-                <div class="carouselImage">Item</div>
-                <div class="carouselImage">Item</div>
-                <div class="carouselImage">Item</div>
-                <div class="carouselImage">Item2</div>
-                <div class="carouselImage">Item87</div>
-                <div class="carouselImage">Item9</div>
-                <div class="carouselImage">Item</div>
-                <div class="carouselImage">Item0</div>
+                <div class="carouselImage">
+                    <video controls>
+                      <source src="http://www.onirikal.com/videos/mp4/bobinaVFX2012_medium_qt.mp4" type="video/mp4">
+                    </video>
+                 </div>
+                 <div class="carouselImage">
+                    <video controls>
+                      <source src="http://www.onirikal.com/videos/mp4/creditos_lhv1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="carouselImage">
+                    <video controls>
+                      <source src="http://www.onirikal.com/videos/mp4/ermessenda.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="carouselImage">
+                    <video controls>
+                      <source src="http://www.onirikal.com/videos/mp4/fontvella.mp4" type="video/mp4">
+                    </video>
+                </div>
+               <div class="carouselImage">
+                    <video controls>
+                      <source src="http://www.onirikal.com/videos/mp4/atroz.mp4" type="video/mp4">
+                    </video>
+                </div>
         </div>
     </div>
 <script>
@@ -231,6 +243,21 @@ $('.carouselImage').bind("mouseover", function(){
 $('.carouselImage').bind("mouseout", function(){
   $imagesCarousel.flickity('pausePlayer');
 });
+ 
+$imagesCarousel.on('settle.flickity', function () {
+      console.log('Flickity settled at ' + flkty.selectedIndex);
+
+      $imagesCarousel.find('.carouselImage video').each(function (i, video) {
+          video.pause();
+          $(video).on('loadeddata', onLoadeddata);
+      });
+
+      $imagesCarousel.find('.carouselImage.is-selected video').each(function (i, video) {
+          video.play();
+          $(video).on('loadeddata', onLoadeddata);
+      });
+
+  });
 </script>
 </body>
 </html>
