@@ -226,16 +226,23 @@ $imagesCarousel.on('scroll.flickity', function() {
   resizeCells();
 });
  
-$imagesCarousel.on('settle.flickity', function () {
-   $imagesCarousel.find('.carouselImage video').each(function (i, video) {
-          $('video')[0].pause();
-          $('video')[0].on('loadeddata', onLoadeddata);
-      });
+$imagesCarousel.each(function(index, element) {
+ 
+var videoTag = $(this).find('.carouselImage.is-selected video'); 
 
-    $imagesCarousel.find('.carouselImage.is-selected video').each(function (i, video) {
-          $('video')[0].play();
-          $('video')[0].on('loadeddata', onLoadeddata);
-      });
+$imagesCarousel.on('settle.flickity', function () {
+       
+      $(videoTag).each(function(ev) {
+            var video = this;
+           $(video).play();
+        }); 
+      
+    });
+ 
+ 
+ 
+ 
+  });
 });
 //HOVER FUNCTIONS
 $('.carouselImage').bind("mouseover", function(){
