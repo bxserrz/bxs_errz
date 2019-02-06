@@ -38,6 +38,7 @@ body { font-family: sans-serif; }
   top:50%;
   left:50%;
   background:green;  
+  z-index:1000;
 }
 
 
