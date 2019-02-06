@@ -6,7 +6,6 @@ body { font-family: sans-serif; }
 
 .carousel {
   background: #FAFAFA;
-  display:none;
 }
 
 .carousel-cell {
@@ -43,7 +42,7 @@ body { font-family: sans-serif; }
 
 .loader {
   position: relative;
-  margin: 0 auto;
+  margin: 9823px auto;
   width: 100px;
   &:before {
     content: '';
