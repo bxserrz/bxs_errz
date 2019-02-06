@@ -227,7 +227,7 @@ $imagesCarousel.on('scroll.flickity', function() {
 });
  
 $imagesCarousel.on('settle.flickity', function () {
-video.play();
+ $(video).get(0).pause();
 });
 //HOVER FUNCTIONS
 $('.carouselImage').bind("mouseover", function(){
