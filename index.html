@@ -227,7 +227,15 @@ $imagesCarousel.on('scroll.flickity', function() {
 });
  
 $imagesCarousel.on('settle.flickity', function () {
- $('video')[0].play();
+   $imagesCarousel.find('.carouselImage video').each(function (i, video) {
+          $('video')[0].pause();
+          $('video')[0].on('loadeddata', onLoadeddata);
+      });
+
+    $imagesCarousel.find('.carouselImage.is-selected video').each(function (i, video) {
+          $('video')[0].play();
+          $('video')[0].on('loadeddata', onLoadeddata);
+      });
 });
 //HOVER FUNCTIONS
 $('.carouselImage').bind("mouseover", function(){
