@@ -226,24 +226,6 @@ $imagesCarousel.on('scroll.flickity', function() {
   resizeCells();
 });
  
-$imagesCarousel.each(function(index, element) {
- 
-var videoTag = $(this).find('.carouselImage.is-selected video'); 
-
-$imagesCarousel.on('settle.flickity', function () {
-       
-      $(videoTag).each(function() {
-            var video = this;
-           $(video).play();
-        }); 
-      
-    });
- 
- 
- 
- 
-  });
-});
 //HOVER FUNCTIONS
 $('.carouselImage').bind("mouseover", function(){
   if (this.className === 'carouselImage nextToSelectedLeft') {
