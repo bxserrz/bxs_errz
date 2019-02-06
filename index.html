@@ -3,247 +3,50 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://bxserrz.github.io/bxs_errz/jquery_touch.js"></script>
+<script src="https://bxserrz.github.io/bxs_errz/flickity.pkgd.js"></script>
+<link rel="stylesheet" type="text/css" href="https://bxserrz.github.io/bxs_errz/flickity.css">
+<link rel="stylesheet" type="text/css" href="https://bxserrz.github.io/bxs_errz/bxs_errz.css">
 <title>vid</title>
-<style>
- body{
-  margin:0;
-  padding:0;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-  .carouselOfImages{
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: auto;
-  background:transparent;
-}
-
-.carouselImage {
-    position: absolute;
-    width: 90%;
-    height: auto;
-    background: #fff;
-    transition: transform 0.5s;
-    margin:25px;
-  }
-    
-.carouselImage.is-selected {
-  z-index:10;
-  transform: scale(1);
-}
-.carouselImage.nextToSelectedLeft, .carouselImage.nextToSelectedRight {
-  transform: scale(1);
-  z-index:5;
-}
-
-/*! Flickity v2.0.5
-https://flickity.metafizzy.co
----------------------------------------------- */
-
-.flickity-enabled {
-  position: relative;
-}
-
-/* .flickity-enabled:focus { outline: none; } */
-
-.flickity-viewport {
-  overflow: hidden;
-  position: relative;
-  height: 100%;
-}
-
-.flickity-slider {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-/* draggable */
-
-.flickity-enabled.is-draggable {
-  -webkit-tap-highlight-color: transparent;
-/*           tap-highlight-color: transparent; */
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.flickity-enabled.is-draggable .flickity-viewport {
-  cursor: move;
-  cursor: -webkit-grab;
-  cursor: grab;
-}
-
-.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
-  cursor: -webkit-grabbing;
-  cursor: grabbing;
-}
-.flickity-viewport {
-    margin: 0px;
-    width: 100%;
-    margin-bottom: 100px;
-}
-
-</style>
 </head>
 <body>
-    <div class="carouselContainer">
-        <div class="carouselOfImages">
-                <div class="carouselImage">
-                    <video controls>
-                      <source src="http://www.onirikal.com/videos/mp4/bobinaVFX2012_medium_qt.mp4" type="video/mp4">
-                    </video>
-                 </div>
-                 <div class="carouselImage">
-                    <video controls>
-                      <source src="http://www.onirikal.com/videos/mp4/creditos_lhv1.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carouselImage">
-                    <video controls>
-                      <source src="http://www.onirikal.com/videos/mp4/ermessenda.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carouselImage">
-                    <video controls>
-                      <source src="http://www.onirikal.com/videos/mp4/fontvella.mp4" type="video/mp4">
-                    </video>
-                </div>
-               <div class="carouselImage">
-                    <video controls>
-                      <source src="http://www.onirikal.com/videos/mp4/atroz.mp4" type="video/mp4">
-                    </video>
-                </div>
-        </div>
-    </div>
-<script>
-//CAROUSEL SETTINGS
-var $imagesCarousel = jQuery('.carouselOfImages').flickity({
-  /* options, defaults listed */
-
-  accessibility: false,
-  /* enable keyboard navigation, pressing left & right keys */
-
-  autoPlay: false,
-  pauseAutoPlayOnHover: false,
-  /* advances to the next cell
-  if true, default is 3 seconds
-  or set time between advances in milliseconds
-  i.e. `autoPlay: 1000` will advance every 1 second */
-
-  cellAlign: 'center',
-  /* alignment of cells, 'center', 'left', or 'right'
-  or a decimal 0-1, 0 is beginning (left) of container, 1 is end (right) */
-
-  // cellSelector: '.topic-switcher__item',
-  /* specify selector for cell elements */
-
-  contain: false,
-  /* will contain cells to container
-  so no excess scroll at beginning or end
-  has no effect if wrapAround is enabled */
-
-  draggable: true,
-  /* enables dragging & flickin
-  freeScroll: false,
-  enables content to be freely scrolled and flicked
-  without aligning cells */
-
-  friction: 0.2,
-  /* smaller number = easier to flick farther */
-
-  initialIndex: 0,
-  /* zero-based index of the initial selected cell */
-
-  lazyLoad: false,
-  /* enable lazy-loading images
-  set img data-flickity-lazyload="src.jpg"
-  set to number to load images adjacent cells */
-
-  percentPosition: true,
-  /* sets positioning in percent values, rather than pixels
-  Enable if items have percent widths
-  Disable if items have pixel widths, like images */
-
-  prevNextButtons: false,
-  /* creates and enables buttons to click to previous & next cells */
-
-  pageDots: false,
-  /* create and enable page dots */
-
-  resize: true,
-  /* listens to window resize events to adjust size & positions */
-
-  rightToLeft: false,
-  /* enables right-to-left layout */
-
-  setGallerySize: true,
-  /* sets the height of gallery
-  disable if gallery already has height set with CSS */
-
-  watchCSS: false,
-  /* watches the content of :after of the element
-  activates if #element:after { content: 'flickity' }
-  IE8 and Android 2.3 do not support watching :after
-  set watch: 'fallbackOn' to enable for these browsers */
-
-  wrapAround: true
-    /* at end of cells, wraps-around to first for infinite scrolling */
-});
-
-function resizeCells() {
-  var flkty = $imagesCarousel.data('flickity');
-  var $current = flkty.selectedIndex;
-  var $length = flkty.cells.length;
-  var $imageNumLimit = 5;
-  if ($length < $imageNumLimit) {
-    $imagesCarousel.flickity('destroy');
-  }
-  jQuery('.carouselOfImages .carouselImage').removeClass("nextToSelectedLeft");
-  jQuery('.carouselOfImages .carouselImage').removeClass("nextToSelectedRight");
-  jQuery('.carouselOfImages .carouselImage').removeClass("nextToSelectedLeft2");
-  jQuery('.carouselOfImages .carouselImage').removeClass("nextToSelectedRight2");
-  jQuery('.carouselOfImages .carouselImage').eq($current - 1).addClass("nextToSelectedLeft");
-  jQuery('.carouselOfImages .carouselImage').eq($current - 2).addClass("nextToSelectedLeft2");
-  var $endCell;
-  if ($current + 1 == $length) {
-    $endCell = "0";
-  } else {
-    $endCell = $current + 1;
-  }
-  jQuery('.carouselOfImages .carouselImage').eq($endCell).addClass("nextToSelectedRight");
-  if($endCell + 1 < $imageNumLimit){
-    jQuery('.carouselOfImages .carouselImage').eq($endCell + 1).addClass("nextToSelectedRight2"); 
-  } else {
-    jQuery('.carouselOfImages .carouselImage').eq(0).addClass("nextToSelectedRight2");
-  }
-}
-resizeCells();
-
-$imagesCarousel.on('scroll.flickity', function() {
-  resizeCells();
-});
- 
-//HOVER FUNCTIONS
-$('.carouselImage').bind("mouseover", function(){
-  if (this.className === 'carouselImage nextToSelectedLeft') {
-    $imagesCarousel.flickity('playLeftSlowPlayer');
-  } else if (this.className === 'carouselImage nextToSelectedLeft2') {
-    $imagesCarousel.flickity('playLeftFastPlayer');
-  } else if (this.className === 'carouselImage nextToSelectedRight') {
-    $imagesCarousel.flickity('playRightSlowPlayer');
-  } else if (this.className === 'carouselImage nextToSelectedRight2') {
-    $imagesCarousel.flickity('playRightFastPlayer');
-  }
-});
-
-$('.carouselImage').bind("mouseout", function(){
-  $imagesCarousel.flickity('pausePlayer');
-});
- 
-
-</script>
+   <div class="carousel"
+   data-flickity='{ "lazyLoad": true }'>
+  <div class="carousel-cell">
+    <img class="carousel-cell-image"
+      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/tulip.jpg" alt="tulip" />
+  </div>
+  <div class="carousel-cell">
+    <img class="carousel-cell-image"
+      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/grapes.jpg" alt="grapes" />
+  </div>
+  <div class="carousel-cell">
+    <img class="carousel-cell-image"
+      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/raspberries.jpg" alt="raspberries" />
+  </div>
+  <div class="carousel-cell">
+    <img class="carousel-cell-image"
+      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/wolf.jpg" alt="wolf" />
+  </div>
+  <div class="carousel-cell">
+    <img class="carousel-cell-image"
+      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/shore.jpg" alt="sea" />
+  </div>
+  <div class="carousel-cell">
+    <img class="carousel-cell-image"
+      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/leaf-droplets.jpg" alt="leaf droplets" />
+  </div>
+  <div class="carousel-cell">
+    <img class="carousel-cell-image"
+      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/gulls.jpg" alt="gulls" />
+  </div>
+  <div class="carousel-cell">
+    <img class="carousel-cell-image"
+      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/touch-screen.jpg" alt="touch screen" />
+  </div>
+  <div class="carousel-cell">
+    <img class="carousel-cell-image"
+      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/van.jpg" alt="van" />
+  </div>
+</div>
 </body>
 </html>
