@@ -31,6 +31,7 @@ body { font-family: sans-serif; }
   opacity: 1;
 }
 
+/*SVG */
 .material-loader {
   position: absolute;
   height: 100%;
@@ -41,4 +42,37 @@ body { font-family: sans-serif; }
   z-index:1000;
 }
 
+
+.material-spinner {
+  animation: rotate 2s linear infinite;
+}
+
+.material-spinner circle {
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 2, 155;
+  stroke-dashoffset: 0;
+  animation: dash 1.35s cubic-bezier(0.4,0,0.2,1) infinite;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 2, 155;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 122, 20;
+    stroke-dashoffset: -20;
+  }
+  100% {
+    stroke-dasharray: 2, 155;
+    stroke-dashoffset: -155;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
