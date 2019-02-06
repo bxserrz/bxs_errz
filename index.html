@@ -232,7 +232,7 @@ var videoTag = $(this).find('.carouselImage.is-selected video');
 
 $imagesCarousel.on('settle.flickity', function () {
        
-      $(videoTag).each(function(ev) {
+      $(videoTag).each(function() {
             var video = this;
            $(video).play();
         }); 
