@@ -1,3 +1,3 @@
 $(window).on("load",function() {
-    $(".material-loader").hide();
+    $(".material-loader").delay(2000).fadeOut("slow");
 });
