@@ -3,56 +3,128 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://bxserrz.github.io/bxs_errz/flickity.pkgd.js"></script>
-<script src="https://bxserrz.github.io/bxs_errz/onload.js"></script>
-<link rel="stylesheet" type="text/css" href="https://bxserrz.github.io/bxs_errz/flickity.css">
-<link rel="stylesheet" type="text/css" href="https://bxserrz.github.io/bxs_errz/bxserrz.css">
 <title>vid</title>
+   <style>
+      body {   
+  color: #333;
+  font-size: 22pt;
+  font-family: 'Teko';
+  letter-spacing: 0.15em;
+}
+
+body * { -webkit-user-select: none }
+
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+  box-shadow:7px 7px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.window {
+  overflow: hidden;
+  position: relative;
+  background: #222;
+}
+
+#carousel {
+  width: 10000px;
+  position: relative;
+  top: 0; left: -450px;
+}
+
+.slide {
+  height: 500px;
+  width: 500px;
+  cursor: pointer;
+  float: left;
+}
+
+.slide#b1 { background: #556270 }
+.slide#b2 { background: #4ECDC4 }
+.slide#b3 { background: #9CE462 }
+.slide#b4 { background: #FF6B6B }
+.slide#b5 { background: #C44D33 }
+
+#prev, #next {
+  cursor: pointer;
+  position: absolute;
+  bottom: -40px;
+  font-size: 14pt;
+}
+
+#prev { left: 0 }
+#next { right: 0 }
+
+.transition {
+  transition: .7s;
+}
+   
+   </style>
 </head>
 <body> 
-   <div class="carousel"
-   data-flickity='{ "lazyLoad": true }'>
-  <div class="carousel-cell">
-    <img class="carousel-cell-image"
-      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/tulip.jpg" alt="tulip" />
+ 
+<h1>INFINITE CAROUSEL</h1>
+<div class="wrap">
+  <div class="window">
+    <div id="carousel">
+      <span class="slide" id="b1">SLIDE-1</span>
+      <span class="slide" id="b2">SLIDE-2</span>  
+      <span class="slide" id="b3">SLIDE-3</span>
+      <span class="slide" id="b4">SLIDE-4</span>  
+      <span class="slide" id="b5">SLIDE-5</span>
+    </div>
   </div>
-  <div class="carousel-cell">
-    <img class="carousel-cell-image"
-      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/grapes.jpg" alt="grapes" />
-  </div>
-  <div class="carousel-cell">
-    <img class="carousel-cell-image"
-      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/raspberries.jpg" alt="raspberries" />
-  </div>
-  <div class="carousel-cell">
-    <img class="carousel-cell-image"
-      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/wolf.jpg" alt="wolf" />
-  </div>
-  <div class="carousel-cell">
-    <img class="carousel-cell-image"
-      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/shore.jpg" alt="sea" />
-  </div>
-  <div class="carousel-cell">
-    <img class="carousel-cell-image"
-      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/leaf-droplets.jpg" alt="leaf droplets" />
-  </div>
-  <div class="carousel-cell">
-    <img class="carousel-cell-image"
-      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/gulls.jpg" alt="gulls" />
-  </div>
-  <div class="carousel-cell">
-    <img class="carousel-cell-image"
-      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/touch-screen.jpg" alt="touch screen" />
-  </div>
-  <div class="carousel-cell">
-    <img class="carousel-cell-image"
-      data-flickity-lazyload="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/van.jpg" alt="van" />
-  </div>
+  <span id="prev">PREV</span>
+  <span id="next">NEXT</span>
 </div>
-<div class="material-loader">
-   <svg class="material-spinner" width="66px" height="66px" stroke-width="5" viewBox="0 0 66 66">
-    <circle cx="33" cy="33" r="25" />
-  </svg>
-</div>
+
+<script>
+   var carousel = $('#carousel'),
+    threshold = 150,
+    slideWidth = 500,
+    dragStart, 
+    dragEnd;
+
+$('#next').click(function(){ shiftSlide(-1) })
+$('#prev').click(function(){ shiftSlide(1) })
+
+carousel.on('mousedown', function(){
+  if (carousel.hasClass('transition')) return;
+  dragStart = event.pageX;
+  $(this).on('mousemove', function(){
+    dragEnd = event.pageX;
+    $(this).css('transform','translateX('+ dragPos() +'px)')
+  })
+  $(document).on('mouseup', function(){
+    if (dragPos() > threshold) { return shiftSlide(1) }
+    if (dragPos() < -threshold) { return shiftSlide(-1) }
+    shiftSlide(0);
+  })
+});
+
+function dragPos() {
+  return dragEnd - dragStart;
+}
+
+function shiftSlide(direction) {
+  if (carousel.hasClass('transition')) return;
+  dragEnd = dragStart;
+  $(document).off('mouseup')
+  carousel.off('mousemove')
+          .addClass('transition')
+          .css('transform','translateX(' + (direction * slideWidth) + 'px)'); 
+  setTimeout(function(){
+    if (direction === 1) {
+      $('.slide:first').before($('.slide:last'));
+    } else if (direction === -1) {
+      $('.slide:last').after($('.slide:first'));
+    }
+    carousel.removeClass('transition')
+		carousel.css('transform','translateX(0px)'); 
+  },700)
+}
+</script>
 </body>
 </html>
