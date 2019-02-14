@@ -3,128 +3,64 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <title>vid</title>
    <style>
-      body {   
-  color: #333;
-  font-size: 22pt;
-  font-family: 'Teko';
-  letter-spacing: 0.15em;
+@import 'lesshat';
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.container {
+    width:20.6%;
+   
+  }
+
+
+img{
+  margin-top:50px;
+  margin-bottom:50px;
+  
 }
 
-body * { -webkit-user-select: none }
-
-.wrap {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  margin: 50% auto;
-  box-shadow:7px 7px 5px 0px rgba(0, 0, 0, 0.25);
+@media only screen and (max-width: 600px) {
+  .container {
+    width:100%;
+  
+  }
 }
 
-.window {
-  overflow: hidden;
-  position: relative;
-  background: #222;
-}
-
-#carousel {
-  width: 10000px;
-  position: relative;
-  top: 0; left: -450px;
-}
-
-.slide {
-  height: 500px;
-  width: 500px;
-  cursor: pointer;
-  float: left;
-}
-
-.slide#b1 { background: #556270 }
-.slide#b2 { background: #4ECDC4 }
-.slide#b3 { background: #9CE462 }
-.slide#b4 { background: #FF6B6B }
-.slide#b5 { background: #C44D33 }
-
-#prev, #next {
-  cursor: pointer;
-  position: absolute;
-  bottom: -40px;
-  font-size: 14pt;
-}
-
-#prev { left: 0 }
-#next { right: 0 }
-
-.transition {
-  transition: .7s;
-}
+h2{
+  font-family: 'Open Sans', sans-serif;
+} 
    
    </style>
 </head>
 <body> 
+<div class="container">
+	
+<h2 class="text-center">scroll down</h2>
+
+<img class="lazy" data-original="https://pixabay.com/static/uploads/photo/2016/02/07/19/50/snow-1185474_960_720.jpg" width="300" height="300">
+  
+<img class="lazy" data-original="https://pixabay.com/static/uploads/photo/2016/02/11/16/59/dog-1194083_960_720.jpg" width="300" height="300">
  
-<h1>INFINITE CAROUSEL</h1>
-<div class="wrap">
-  <div class="window">
-    <div id="carousel">
-      <span class="slide" id="b1">SLIDE-1</span>
-      <span class="slide" id="b2">SLIDE-2</span>  
-      <span class="slide" id="b3">SLIDE-3</span>
-      <span class="slide" id="b4">SLIDE-4</span>  
-      <span class="slide" id="b5">SLIDE-5</span>
-    </div>
-  </div>
-  <span id="prev">PREV</span>
-  <span id="next">NEXT</span>
+<img class="lazy" data-original="https://pixabay.com/static/uploads/photo/2016/01/14/20/55/bridge-1140758_960_720.jpg" width="300" height="300">
+
+<img class="lazy" data-original="https://pixabay.com/static/uploads/photo/2016/01/19/18/13/baby-1150109_960_720.jpg" width="300" height="300"> 
+  
+<img class="lazy" data-original="https://pixabay.com/static/uploads/photo/2016/02/17/19/26/tomato-1205699_960_720.jpg" width="300" height="300">
+  
+<img class="lazy" data-original="https://pixabay.com/static/uploads/photo/2016/01/05/13/58/apple-1122537_960_720.jpg" width="300" height="300"> 
+  
 </div>
 
 <script>
-   var carousel = $('#carousel'),
-    threshold = 150,
-    slideWidth = 500,
-    dragStart, 
-    dragEnd;
-
-$('#next').click(function(){ shiftSlide(-1) })
-$('#prev').click(function(){ shiftSlide(1) })
-
-carousel.on('mousedown', function(){
-  if (carousel.hasClass('transition')) return;
-  dragStart = event.pageX;
-  $(this).on('mousemove', function(){
-    dragEnd = event.pageX;
-    $(this).css('transform','translateX('+ dragPos() +'px)')
-  })
-  $(document).on('mouseup', function(){
-    if (dragPos() > threshold) { return shiftSlide(1) }
-    if (dragPos() < -threshold) { return shiftSlide(-1) }
-    shiftSlide(0);
-  })
+ $("img.lazy").lazyload({
+    effect : "fadeIn"
 });
-
-function dragPos() {
-  return dragEnd - dragStart;
-}
-
-function shiftSlide(direction) {
-  if (carousel.hasClass('transition')) return;
-  dragEnd = dragStart;
-  $(document).off('mouseup')
-  carousel.off('mousemove')
-          .addClass('transition')
-          .css('transform','translateX(' + (direction * slideWidth) + 'px)'); 
-  setTimeout(function(){
-    if (direction === 1) {
-      $('.slide:first').before($('.slide:last'));
-    } else if (direction === -1) {
-      $('.slide:last').after($('.slide:first'));
-    }
-    carousel.removeClass('transition')
-		carousel.css('transform','translateX(0px)'); 
-  },700)
-}
+      
 </script>
 </body>
 </html>
